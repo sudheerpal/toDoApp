@@ -3,6 +3,8 @@ Its a basic functioning to do app, where we can add new task, edit existing task
 
 Filter (search) task and clear list are extra added feature.
 
+## Instal NPM module
+npm i     to add all dpenedencies.
 
 ## Development server
 
