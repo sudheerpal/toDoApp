@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { HttpServiceService } from "./http-service.service";
 class Task{
   title: string;
   is_canceled: boolean = false;
   displayable: boolean = true;
 
   constructor(title: string, private component){
-    this.title = "To-Do App";
+    this.title = title;
   }
 
   get display_title(){
@@ -66,7 +66,8 @@ class Task{
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  loggedIn:boolean;
   tasks: Array<Task> = [
     new Task("Buy fruits while going home", this),
     new Task("Pay Mobile Bill", this),
@@ -80,6 +81,13 @@ export class AppComponent {
     if (do_delete){
       this.tasks.splice(0);
     }
+  }
+  constructor(private http:HttpServiceService) {
+  }
+  ngOnInit() {
+    this.http.isLoggedFn().subscribe(
+      (x) => this.loggedIn = x
+    );
   }
 
   addTask(input){
@@ -127,5 +135,11 @@ export class AppComponent {
     filterInput.value = "";
     this.filter_by = "";
     this.setTaskDisplays();
+  }
+
+  Logout(){
+    console.log('logout hit!!!');
+    localStorage.clear();
+    this.http.loggedIn.next(false);
   }
 }

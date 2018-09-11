@@ -1,12 +1,25 @@
+
+<nav class="navbar navbar-default">
+    <div *ngIf="loggedIn" class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">Home</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="#">Welcome Sudheer!</a></li>
+        <li><a (click)="Logout()" >LogOut</a></li>
+      </ul>
+    </div>
+  </nav>
+
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
-            <h1> {{title}} </h1>
+            <h1> toDoApp </h1>
         </div>
     </div>
 </div>
 
-<div class="container">
+<div *ngIf="loggedIn" class="container">
     <div class="row">
         <div class="col-xs-8">
             <input type="text" class="form-control" name="task" placeholder="Task" #taskInput>
@@ -64,6 +77,15 @@
                     </tr>
                 </tfoot>
             </table>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="!loggedIn" class="container">
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+            <app-login></app-login>
         </div>
     </div>
 </div>
